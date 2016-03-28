@@ -1,0 +1,104 @@
+<div class="row" ng-init="init()">
+  <div class="col-xs-12">
+      <h1>Angular Todo app</h1>
+      <p class="lead">
+        Please select a list of todos
+      </p>
+        
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        
+        <div class="row">
+          <div class="col-xs-12">
+            <form ng-show="showAddList" ng-submit="addList()">
+              <div class="input-group">
+                <input type="text" ng-model="newList" placeholder="add list" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">Add list!</button>
+                </span>
+              </div><!-- /input-group -->
+            </form>
+            
+          </div>
+
+          <div class="col-xs-12">
+            <div class="lists">
+              <div class="dropdown pull-left">
+                <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  {{activeListName}} 
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                 <li ng-repeat="list in todos" ng-class="{ active: $index == activeList }">
+                    <a ng-click="selectList($index)" >{{list.name}} <span class="badge">{{list.list.length}}</span></a>
+                  </li>
+                </ul>
+              </div>
+              <a href="#/add" class="btn btn-primary btn-sm pull-left" ng-click="showAddList = !showAddList">Add new list</a>
+            </div>
+          </div>
+        </div>
+
+        <ul class="nav nav-pills">
+          <li role="presentation" ng-class="{ active: listFilter === 'all' }" ng-click="show='all'"><button>All</button></li>
+          <li role="presentation" ng-class="{ active: listFilter === 'completed' }" ng-click="show='completed'"><button>All Completed</button></li>
+          <li role="presentation" ng-class="{ active: listFilter === 'incomplete' }" ng-click="show='incomplete'"><button>All Incomplete</button></li>
+        </ul>
+
+        <form ng-submit="addTask(activeList)">
+          <div class="input-group">
+            <input type="text" ng-model="newTask" placeholder="add task" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Add task!</button>
+            </span>
+          </div><!-- /input-group -->
+        </form>
+
+        <div class="input-group">
+          <input type="text" ng-model="search" placeholder="search tasks" class="form-control">
+        </div><!-- /input-group -->
+
+        <ul ng-model="todos.list" ng-repeat="list in todos" class="list-unstyled" ng-show="$index === activeList">
+          <li ng-repeat="todo in list.list | filter:search">
+            <div class="checkbox">
+              <label ng-class="{ done: todo.complete }">
+                <input type="checkbox" ng-model="todo.complete">{{todo.name}}
+              </label>
+              <button class="btn btn-danger btn-xs" ng-click="deleteTask($index)">&times;</button>
+            </div>
+          </li>
+        </ul>
+          
+        </div>
+      
+      <div class="col-xs-12 col-sm-6">
+        <h4>Stats</h4>
+        <p>All Tasks: {{allTasks()}}</p>
+        <p>All Completed Tasks: {{allTasks() - allIncompleteTasks()}}</p>
+        <p>All Incomplete Tasks: {{allIncompleteTasks()}}</p>
+      </div>
+
+      </div>
+    </div>
+    
+  </div>
+
+
+<div class="test">
+<p>{{ lists | json}}</p>
+</div>
+<div class="row marketing">
+
+  <h4>HTML5 Boilerplate</h4>
+  <p>
+    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+  </p>
+
+  <h4>Angular</h4>
+  <p>
+    AngularJS is a toolset for building the framework most suited to your application development.
+  </p>
+
+  <h4>Karma</h4>
+  <p>Spectacular Test Runner for JavaScript.</p>
+</div>

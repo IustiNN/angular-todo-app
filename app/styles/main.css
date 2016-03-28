@@ -1,0 +1,15 @@
+/**/
+
+label.done {
+	text-decoration: line-through;
+	font-style: italic;
+}
+
+.input-group {
+	margin-bottom: 25px;
+}
+
+.dropdown {
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
